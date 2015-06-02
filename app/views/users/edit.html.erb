@@ -1,0 +1,13 @@
+<h2>Let's Set Up Your Profile</h2>
+
+<%= form_for @user do |f| %>
+  <%= f.label :city %>
+  <%= f.text_field :city %>
+  <%= f.label :state %>
+  <%= f.text_field :state %>
+  <%= f.label :occupation %>
+  <%= f.text_field :occupation %>
+  <%= f.label :bio, "Tell us a little about yourself" %>
+  <%= f.text_area :bio %>
+  <%= f.submit "Add To Profile" %>
+<% end %>
