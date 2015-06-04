@@ -5,11 +5,11 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(params.require(:user).permit(:city, :state, :occupation, :bio))
-      flash[:notice] = "Nice, nice, you're almost ready to go"
+    if @user.update(params.require(:user).permit(:city, :state, :occupation, :bio, :image))
+      flash[:notice] = "welcome to your profile"
       redirect_to user_path(@user)
     else
-      render :new
+      render :edit
     end
   end
 

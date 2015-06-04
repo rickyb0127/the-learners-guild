@@ -2,4 +2,15 @@
   <h1><%= @user.full_name %></h1>
 </div>
 
-<%= @user.bio %>
+<% if @user.image.present? %>
+  <%= image_tag @user.image.url(:large) %>
+<% end %>
+
+</br>
+City: <%= @user.city %>
+</br>
+State: <%= @user.state %>
+</br>
+Occupation: <%= @user.occupation %>
+</br>
+Bio: <%= @user.bio %>

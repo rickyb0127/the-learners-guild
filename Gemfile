@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem "paperclip", "~> 4.2"
 gem 'pry'
 gem 'omniauth-facebook'
 gem 'rails_12factor'
