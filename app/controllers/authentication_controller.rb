@@ -8,9 +8,9 @@ class AuthenticationController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       flash[:notice] = "Thanks for signing in"
-      redirect_to edit_user_path(@user)
+      redirect_to user_path(@user)
     else
-      render :new
+      render root_path
     end
   end
 

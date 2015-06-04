@@ -6,6 +6,7 @@ class RegistrationsController < ApplicationController
       flash[:notice] = "Thanks for signing up"
       redirect_to edit_user_path(@user)
     else
+      flash[:notice] = "Something went wrong"
       render 'welcome/index'
     end
   end

@@ -11,3 +11,5 @@
 /log/*
 !/log/.keep
 /tmp
+facebook.yml
+.DS_Store
