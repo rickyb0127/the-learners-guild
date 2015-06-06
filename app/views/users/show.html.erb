@@ -1,15 +1,19 @@
 <div class="page-header">
   <h1><%= @user.full_name %></h1>
+  <%= link_to "Edit Profile", edit_user_path(@user) %>
 </div>
 
 <% if @user.image.present? %>
   <%= image_tag @user.image.url(:large) %>
 <% end %>
 
-</br>
+<h4>Location</h4>
 City: <%= @user.city %>
 </br>
 State: <%= @user.state %>
+</br>
+<h4>Personal Info</h4>
+Member Since: <%= @user.created_at.strftime("%m/%d/%Y") %>
 </br>
 Occupation: <%= @user.occupation %>
 </br>

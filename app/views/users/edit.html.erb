@@ -1,49 +1,79 @@
-<h2>Let's Set Up Your Profile</h2>
+<% if Time.now.utc.to_i == @user.created_at.to_i %>
 
-<% if @user.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+  <h2>Let's Set Up Your Profile</h2>
 
-    <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-<%= form_for @user, html: { multipart: true } do |f| %>
-  <div class="first-form">
-    <%= f.label :image, "Add an image to your profile" %>
-    <%= f.file_field :image %>
-  </div>
-  <div class="second-form">
-    <%= f.label :city, "What city do you live in?" %>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_for @user, html: { multipart: true } do |f| %>
+    <div class="first-form">
+      <%= f.label :image, "Add an image to your profile" %>
+      <%= f.file_field :image %>
+    </div>
+    <div class="second-form">
+      <%= f.label :city, "What city do you live in?" %>
+      <%= f.text_field :city %>
+    </div>
+    <div class="third-form">
+      <%= f.label :state, "What state?" %>
+      <%= f.text_field :state %>
+    </div>
+    <div class="fourth-form">
+      <%= f.label :occupation, "What do you do for work" %>
+      <%= f.text_field :occupation %>
+    </div>
+    <div class="fifth-form">
+      <%= f.label :bio, "Tell us a little bit about yourself" %>
+      <%= f.text_area :bio %>
+    </div>
+    <div class="next-1">
+      Next
+    </div>
+    <div class="next-2">
+      Next
+    </div>
+    <div class="next-3">
+      Next
+    </div>
+    <div class="next-4">
+      Next
+    </div>
+    <%= f.submit "Submit (You can always edit your info later)", class: "btn btn-primary submit" %>
+  <% end %>
+
+  <% else %>
+
+  <h1>Edit Profile</h1>
+
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_for @user do |f| %>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+    <%= f.label :city %>
     <%= f.text_field :city %>
-  </div>
-  <div class="third-form">
-    <%= f.label :state, "What state?" %>
+    <%= f.label :state %>
     <%= f.text_field :state %>
-  </div>
-  <div class="fourth-form">
-    <%= f.label :occupation, "What do you do for work" %>
-    <%= f.text_field :occupation %>
-  </div>
-  <div class="fifth-form">
-    <%= f.label :bio, "Tell us a little bit about yourself" %>
-    <%= f.text_area :bio %>
-  </div>
-  <div class="next-1">
-    Next
-  </div>
-  <div class="next-2">
-    Next
-  </div>
-  <div class="next-3">
-    Next
-  </div>
-  <div class="next-4">
-    Next
-  </div>
-  <%= f.submit "Submit (You can always edit your info later)", class: "btn btn-primary submit" %>
+  <%= f.submit "Update" %>
+  <% end %>
+
 <% end %>

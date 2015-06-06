@@ -22,11 +22,39 @@
  }
 
  .navbar {
-    background-color: #00BA95;
+   background-color: #484848;
+ }
+
+  .bg-1 {
+    position:absolute; left: 0; right:0; top:0;
+    height: 500px;
+    width: auto;
+    background-color: black;
+    color: white;
   }
 
-  // body.welcome{
-  //   background-image: url("lg-index-background");
-  //   background-size: 1400px auto;
-  //   background-repeat: no-repeat;
-  // }
+  .welcome {
+    position:absolute; left: 0; right:0; top:500px;
+    height: 400px;
+    width: auto;
+  }
+
+  .index-img {
+    height: 400px;
+    width: 100%;
+  }
+
+  .bg-2 {
+    position:absolute; left: 0; right:0; top:900px;
+    height: 500px;
+    width: auto;
+    background-color: black;
+    color: white;
+  }
+
+  .txt {
+    position: relative;
+    top: 20%;
+    text-align: center;
+    font-family: fantasy;
+  }

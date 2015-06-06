@@ -5,8 +5,8 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(params.require(:user).permit(:city, :state, :occupation, :bio, :image))
-      flash[:notice] = "welcome to your profile"
+    if @user.update(params.require(:user).permit(:city, :state, :occupation, :bio, :image, :password))
+      flash[:notice] = "profile updated"
       redirect_to user_path(@user)
     else
       render :edit
