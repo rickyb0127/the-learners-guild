@@ -1,7 +1,7 @@
 class UserSkill < ActiveRecord::Base
   belongs_to :user
   belongs_to :skill
-  validates :skill_id, uniqueness: { scope: :learned }
+  validates :skill_id, uniqueness: { scope: :user_id }
 
   def skill_name
     skill.try(:name)

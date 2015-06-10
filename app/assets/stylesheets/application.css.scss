@@ -52,9 +52,25 @@
     color: white;
   }
 
-  .txt {
-    position: relative;
-    top: 20%;
+  .index-txt {
     text-align: center;
     font-family: fantasy;
+  }
+
+  .head-format {
+    position: relative;
+    top: 20%;
+  }
+
+  .second-head-format {
+    position: relative;
+    top: 40%;
+  }
+
+  .buffer {
+    height: 50px;
+  }
+
+  .profile-info {
+
   }
