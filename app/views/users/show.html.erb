@@ -18,3 +18,38 @@ Member Since: <%= @user.created_at.strftime("%m/%d/%Y") %>
 Occupation: <%= @user.occupation %>
 </br>
 Bio: <%= @user.bio %>
+
+
+</br>
+add skills you know
+<%= form_for @user_skill do |f| %>
+  <%= f.text_field :skill_name %>
+  <%= f.hidden_field :learned, :value => true %>
+  <%= f.submit "add skill" %>
+<% end %>
+
+</br>
+add skills you want to learn
+<%= form_for @user_skill do |f| %>
+  <%= f.text_field :skill_name %>
+  <%= f.submit "add skill to wishlist" %>
+<% end %>
+
+</br>
+My Skills:
+<% @user.user_skills.where(learned: true).each do |user_skill| %>
+  <p><%= user_skill.skill.name %></p>
+<% end %>
+
+</br>
+My Wishlist:
+<% @user.user_skills.where(learned: nil).each do |user_skill| %>
+  <p><%= user_skill.skill.name %></p>
+<% end %>
+
+</br>
+<%= form_tag("/search", method: "get") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>

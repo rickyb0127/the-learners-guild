@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :users
+  resources :skills
+  resources :user_skills
 
 end
