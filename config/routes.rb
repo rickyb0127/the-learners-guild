@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   resources :users
   resources :skills
   resources :user_skills
+  resources :skills_to_learn
 
 end

@@ -1,12 +1,17 @@
 <div class="page-header">
   <h1><%= @user.full_name %></h1>
-  <%= link_to "Edit Profile", edit_user_path(@user), class: "answer-link", remote: true %>
+  <% if current_user.id == @user.id %>
+    <%= link_to "Edit Profile", edit_user_path(@user), class: "answer-link", remote: true %>
+  <% else %>
+    <%= link_to "Send Direct Message" %>
+  <% end %>
 </div>
 
 <div class="row">
   <div class="col-md-3">
     <% if @user.image.present? %>
       <%= image_tag @user.image.url(:large) %>
+      <p><%= link_to "Change Profile Picture" %></p>
     <% else %>
       <%= form_for @user, html: { multipart: true } do |f| %>
         <%= f.label :image, "Add an image to your profile" %>
@@ -88,17 +93,7 @@
   <div class="my-wishlist col-md-6">
     <h4>My Wishlist:</h4>
     <% @user.user_skills.where(learned: nil).each do |user_skill| %>
-      <p><%= user_skill.skill.name %></p>
+      <p><%= link_to user_skill.skill.name, skills_to_learn_path(user_skill.skill.id) %></p>
     <% end %>
   </div>
 </div>
-
-<div class="buffer"></div>
-
-<div class="search">
-  <%= form_tag("/search", method: "get") do %>
-    <%= label_tag(:q, "Search for:") %>
-    <%= text_field_tag(:q) %>
-    <%= submit_tag("Search") %>
-  <% end %>
-</end>
