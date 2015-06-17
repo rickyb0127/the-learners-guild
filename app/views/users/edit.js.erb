@@ -1,4 +1,12 @@
-$(".answer-link").hide();
+$(".edit-link").hide();
+$(".location").hide();
+$(".personal-info").hide();
+
 $(".city").hide();
-$("#new-answer-form").html("<%= escape_javascript (render 'form') %>");
-$('#new-answer-form').slideDown(350);
+$(".state").hide();
+$(".member").hide();
+$(".occupation").hide();
+$(".bio").hide();
+
+$("#edit-profile-form").html("<%= escape_javascript (render 'form') %>");
+$('#edit-profile-form').slideDown(350);

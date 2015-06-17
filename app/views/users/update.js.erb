@@ -1,0 +1,16 @@
+$(".edit-link").show();
+$(".edit-form").remove();
+
+$(".location").show();
+$(".personal-info").show();
+
+$(".city").show();
+$(".state").show();
+$(".member").show();
+$(".occupation").show();
+$(".bio").show();
+
+$(".city-data").html("<%= @user.city %>");
+$(".state-data").html("<%= @user.state %>");
+$(".occupation-data").html("<%= @user.occupation %>");
+$(".bio-data").html("<%= @user.bio %>");

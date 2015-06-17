@@ -1,7 +1,7 @@
 <div class="page-header">
   <h1><%= @user.full_name %></h1>
   <% if current_user.id == @user.id %>
-    <%= link_to "Edit Profile", edit_user_path(@user), class: "answer-link", remote: true %>
+    <%= link_to "Edit Profile", edit_user_path(@user), class: "edit-link", remote: true %>
   <% else %>
     <%= link_to "Send Direct Message" %>
   <% end %>
@@ -22,23 +22,25 @@
   </div>
 
   <div class="profile-info col-md-6">
-    <h4>Location</h4>
+    <div id="edit-profile-form" style="display:none;"></div>
+    <h4 class="location">Location</h4>
     <div class="city">
-      City: <%= @user.city %>
+      City: <span class="city-data"><%= @user.city %></span>
     </div>
-    <div id="new-answer-form" style="display:none;"></div>
 
-    State: <%= @user.state %>
-    <h4>Personal Info</h4>
+    <div class="state">
+      State: <span class="state-data"><%= @user.state %></span>
+    </div>
+    <h4 class="personal-info">Personal Info</h4>
 
     <div class="member">
       Member Since: <%= @user.created_at.strftime("%m/%d/%Y") %>
     </div>
     <div class="occupation">
-      Occupation: <%= @user.occupation %>
+      Occupation: <span class="occupation-data"><%= @user.occupation %></span>
     </div>
     <div class="bio">
-      Bio: <%= @user.bio %>
+      Bio: <span class="bio-data"><%= @user.bio %></span>
     </div>
   </div>
 

@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'responders', '~> 2.1.0'
 gem "paperclip", "~> 4.2"
 gem 'pry'
 gem 'omniauth-facebook'
