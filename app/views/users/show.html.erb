@@ -88,14 +88,18 @@
   <div class="my-skills col-md-6">
     <h4>My Skills:</h4>
     <% @user.user_skills.where(learned: true).each do |user_skill| %>
-      <p><%= user_skill.skill.name %></p>
+      <p><%= user_skill.skill.name %>
+        <%= link_to " ", (user_skill), data: {confirm: "Are you sure?", toggle: "tooltip", placement: "right", title: "remove skill"}, method: :delete, class: "glyphicon glyphicon-remove delete" %>
+      </p>
     <% end %>
   </div>
 
   <div class="my-wishlist col-md-6">
     <h4>My Wishlist:</h4>
     <% @user.user_skills.where(learned: nil).each do |user_skill| %>
-      <p><%= link_to user_skill.skill.name, skills_to_learn_path(user_skill.skill.id) %></p>
+      <p><%= link_to user_skill.skill.name, skills_to_learn_path(user_skill.skill.id) %>
+        <%= link_to " ", (user_skill), data: {confirm: "Are you sure?", toggle: "tooltip", placement: "right", title: "remove skill"}, method: :delete, class: "glyphicon glyphicon-remove delete" %>
+      </p>
     <% end %>
   </div>
 </div>

@@ -16,4 +16,12 @@ class UserSkillsController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
+
+  def destroy
+    @user = current_user
+    @user_skill = UserSkill.find(params[:id])
+    @user_skill.destroy
+    flash[:notice] = "skill was removed"
+    redirect_to user_path(@user)
+  end
 end

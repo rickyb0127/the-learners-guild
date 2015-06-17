@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  respond_to :html, :js
-
   def index
     @user = current_user
     @users = User.all
@@ -13,7 +11,6 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(params.require(:user).permit(:city, :state, :occupation, :bio, :image, :password))
-      flash[:notice] = "profile was updated"
       respond_to do |format|
         format.html {redirect_to user_path(@user)}
         format.js

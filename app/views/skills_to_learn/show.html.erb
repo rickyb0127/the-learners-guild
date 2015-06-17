@@ -7,6 +7,7 @@
       <%= image_tag matched_user.image.url(:med) %>
     <% end %>
     <p><%= link_to matched_user.full_name, user_path(matched_user) %> knows <%= matched_skill.skill.name %></p>
+    <p>Lives in <%= matched_user.city %></p>
     <p><div class="btn btn-primary">Propose Meetup</div></p>
   <% end %>
 <% end %>
