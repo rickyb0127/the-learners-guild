@@ -7,11 +7,20 @@
   <% end %>
 </div>
 
+<% if current_user.id == @user.id %>
 <div class="row">
   <div class="col-md-3">
     <% if @user.image.present? %>
       <%= image_tag @user.image.url(:large) %>
-      <p><%= link_to "Change Profile Picture" %></p>
+      <div class="edit-picture-link">
+        <%= link_to "Change Profile Picture" %>
+      </div>
+      <div class="edit-picture">
+        <%= form_for @user, html: { multipart: true } do |f| %>
+          <%= f.file_field :image %>
+          <%= f.submit "change picture", class: "btn-sm btn-primary" %>
+        <% end %>
+      </div>
     <% else %>
       <%= form_for @user, html: { multipart: true } do |f| %>
         <%= f.label :image, "Add an image to your profile" %>
@@ -20,6 +29,16 @@
       <% end %>
     <% end %>
   </div>
+<% else %>
+<div class="row">
+  <div class="col-md-3">
+    <% if @user.image.present? %>
+      <%= image_tag @user.image.url(:large) %>
+    <% else %>
+      Image Not Found
+    <% end %>
+  </div>
+<% end %>
 
   <div class="profile-info col-md-6">
     <div id="edit-profile-form" style="display:none;"></div>
@@ -51,55 +70,75 @@
 
 <div class="buffer"></div>
 
-<div class="row">
-  <div class="add-skills col-md-6">
-    <h4>What skills do you already know?</h4>
-    <%= form_for @user_skill, class: "form-horizontal" do |f| %>
-      <div class="form-group">
-        <div class="col-xs-4">
-          <%= f.text_field :skill_name, class: "form-control" %>
-        </div>
-      </div>
-      <%= f.hidden_field :learned, :value => true %>
+<% if current_user.id == @user.id %>
+  <div class="row">
+    <div class="add-skills col-md-6">
+      <h4>What skills do you already know?</h4>
+      <%= form_for @user_skill, class: "form-horizontal" do |f| %>
         <div class="form-group">
-          <%= f.submit "Add known skill", class: "btn btn-primary" %>
+          <div class="col-xs-4">
+            <%= f.text_field :skill_name, class: "form-control" %>
+          </div>
         </div>
-    <% end %>
-  </div>
+        <%= f.hidden_field :learned, :value => true %>
+          <div class="form-group">
+            <%= f.submit "Add known skill", class: "btn btn-primary" %>
+          </div>
+      <% end %>
+    </div>
 
-  <div class="add-wishlist col-md-6">
-    <h4>What skills do you want to learn?</h4>
-    <%= form_for @user_skill, class: "form-horizontal" do |f| %>
-      <div class=:form-group>
-        <div class="col-xs-4">
-          <%= f.text_field :skill_name, class: "form-control" %>
+    <div class="add-wishlist col-md-6">
+      <h4>What skills do you want to learn?</h4>
+      <%= form_for @user_skill, class: "form-horizontal" do |f| %>
+        <div class=:form-group>
+          <div class="col-xs-4">
+            <%= f.text_field :skill_name, class: "form-control" %>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <%= f.submit "Add skill to wishlist", class: "btn btn-primary" %>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<div class="buffer"></div>
-
-<div class="row">
-  <div class="my-skills col-md-6">
-    <h4>My Skills:</h4>
-    <% @user.user_skills.where(learned: true).each do |user_skill| %>
-      <p><%= user_skill.skill.name %>
-        <%= link_to " ", (user_skill), data: {confirm: "Are you sure?", toggle: "tooltip", placement: "right", title: "remove skill"}, method: :delete, class: "glyphicon glyphicon-remove delete" %>
-      </p>
-    <% end %>
+        <div class="form-group">
+          <%= f.submit "Add skill to wishlist", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
-  <div class="my-wishlist col-md-6">
-    <h4>My Wishlist:</h4>
-    <% @user.user_skills.where(learned: nil).each do |user_skill| %>
-      <p><%= link_to user_skill.skill.name, skills_to_learn_path(user_skill.skill.id) %>
-        <%= link_to " ", (user_skill), data: {confirm: "Are you sure?", toggle: "tooltip", placement: "right", title: "remove skill"}, method: :delete, class: "glyphicon glyphicon-remove delete" %>
-      </p>
-    <% end %>
+  <div class="buffer"></div>
+
+  <div class="row">
+    <div class="my-skills col-md-6">
+      <h4>My Skills:</h4>
+      <% @user.user_skills.where(learned: true).each do |user_skill| %>
+        <p><%= user_skill.skill.name %>
+          <%= link_to " ", (user_skill), data: {confirm: "Are you sure?", toggle: "tooltip", placement: "right", title: "remove skill"}, method: :delete, class: "glyphicon glyphicon-remove delete" %>
+        </p>
+      <% end %>
+    </div>
+
+    <div class="my-wishlist col-md-6">
+      <h4>My Wishlist:</h4>
+      <% @user.user_skills.where(learned: nil).each do |user_skill| %>
+        <p><%= link_to user_skill.skill.name, skills_to_learn_path(user_skill.skill.id) %>
+          <%= link_to " ", (user_skill), data: {confirm: "Are you sure?", toggle: "tooltip", placement: "right", title: "remove skill"}, method: :delete, class: "glyphicon glyphicon-remove delete" %>
+        </p>
+      <% end %>
+    </div>
   </div>
-</div>
+<% else %>
+  <div class="buffer"></div>
+
+  <div class="row">
+    <div class="my-skills col-md-6">
+      <h4><%= @user.full_name %>'s Skills:</h4>
+      <% @user.user_skills.where(learned: true).each do |user_skill| %>
+        <p><%= user_skill.skill.name %></p>
+      <% end %>
+    </div>
+
+    <div class="my-wishlist col-md-6">
+      <h4><%= @user.full_name %>'s Wishlist:</h4>
+      <% @user.user_skills.where(learned: nil).each do |user_skill| %>
+        <p><%= link_to user_skill.skill.name, skills_to_learn_path(user_skill.skill.id) %></p>
+      <% end %>
+    </div>
+  </div>
+<% end %>
