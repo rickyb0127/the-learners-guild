@@ -1,0 +1,26 @@
+<%= form_for @message, class: "form-horizontal" do |f| %>
+  <div class="form-group">
+    <%= f.label :body, "Message" %>
+    <textarea class="form-control" rows="5" name="message[body]" id="message_body"></textarea>
+  </div>
+  <div class="form-group">
+    <%= f.label :trade_give_skill_id, "My Skill To Trade" %>
+    <%= f.collection_select(:trade_give_skill_id, UserSkill.where(user_id: current_user.id, learned: true), :id, :skill_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :trade_ask_skill_id, "Skill To Trade For" %>
+    <%= f.collection_select(:trade_ask_skill_id, UserSkill.where(user_id: params[:recipient_id], learned: true), :id, :skill_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :start_time %>
+    <%= f.datetime_select(:start_time) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :end_time %>
+    <%= f.datetime_select(:end_time) %>
+  </div>
+  <%= f.hidden_field :recipient_id, :value => params[:recipient_id] %>
+  <div class="form-group">
+    <%= f.submit "Send Proposal", class: "btn btn-primary" %>
+  </div>
+<% end %>

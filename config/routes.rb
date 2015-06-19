@@ -14,5 +14,6 @@ Rails.application.routes.draw do
   resources :skills
   resources :user_skills
   resources :skills_to_learn
+  resources :messages
 
 end

@@ -23,5 +23,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @user_skill = UserSkill.new
+    @message = Message.new
   end
 end

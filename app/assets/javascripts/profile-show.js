@@ -8,5 +8,4 @@ $(document).ready(function () {
   $(".edit-picture-link").click(function () {
     $(".edit-picture").show();
   });
-
 });

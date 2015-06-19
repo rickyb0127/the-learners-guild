@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150606162716) do
+ActiveRecord::Schema.define(version: 20150619170503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.text     "body"
+    t.integer  "trade_give_skill_id"
+    t.integer  "trade_ask_skill_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
 
   create_table "skills", force: :cascade do |t|
     t.string "name"
