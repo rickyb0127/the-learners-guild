@@ -1,0 +1,29 @@
+<div class="page-header">
+  <h1>Sent</h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </thead>
+
+  <tbody>
+    <% @messages.each do |message| %>
+    <% message.sender.user_skills.where(id: "#{message.trade_give_skill_id}").each do |sender| %>
+    <% message.recipient.user_skills.where(id: "#{message.trade_ask_skill_id}").each do |recipient| %>
+    <tr data-link="<%= received_message_path(message) %>">
+      <td>To: <%= message.recipient.full_name %></td>
+      <td><%= sender.skill.name %> for <%= recipient.skill.name %></td>
+      <td><%= message.body %></td>
+      <td><%= message.created_at.strftime("%b %d") %></td>
+    </tr>
+  </tbody>
+
+    <% end %>
+    <% end %>
+    <% end %>
+
+</table>

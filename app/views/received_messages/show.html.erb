@@ -1,0 +1,11 @@
+<div class="page-header">
+  <h1>Trade Breakdown</h1>
+</div>
+
+<% @message.sender.user_skills.where(id: "#{@message.trade_give_skill_id}").each do |sender| %>
+<% @message.recipient.user_skills.where(id: "#{@message.trade_ask_skill_id}").each do |recipient| %>
+  <%= @message.sender.full_name %>
+  sends <%= sender.skill.name %>
+  for <%= recipient.skill.name %>
+<% end %>
+<% end %>

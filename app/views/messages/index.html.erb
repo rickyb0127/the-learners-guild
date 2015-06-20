@@ -1,0 +1,10 @@
+<% @messages.each do |message| %>
+  <h1>Trade Proposed By <%= message.sender.full_name %> To <%= message.recipient.full_name %></h1>
+  <% message.sender.user_skills.where(id: "#{message.trade_give_skill_id}").each do |sender| %>
+    <p><%= sender.skill.name %></p>
+  <% end %>
+  <p>For</p>
+  <% message.recipient.user_skills.where(id: "#{message.trade_ask_skill_id}").each do |recipient| %>
+    <p><%= recipient.skill.name %></p>
+  <% end %>
+<% end %>

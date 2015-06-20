@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  has_many :messages, :foreign_key => :sender_id
+  has_many :messages
   has_many :user_skills
   has_many :skills, through: :user_skills
 
