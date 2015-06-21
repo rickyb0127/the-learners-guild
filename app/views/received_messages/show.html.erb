@@ -9,3 +9,11 @@
   for <%= recipient.skill.name %>
 <% end %>
 <% end %>
+
+<div class="buffer"></div>
+
+Message
+<p><%= @message.body %></p>
+
+Start date and time
+<%= @message.start_time.strftime("%a, %b %d at %I:%M %p") %>

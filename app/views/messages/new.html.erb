@@ -13,12 +13,14 @@
     <%= f.collection_select(:trade_ask_skill_id, UserSkill.where(user_id: params[:recipient_id], learned: true), :id, :skill_name) %>
   </div>
   <div class="form-group">
-    <%= f.label :start_time %>
-    <%= f.datetime_select(:start_time) %>
+    <%= f.label :start_time, "Start Date and Time" %>
+    <%= f.date_field :start_time %>
+    <%= f.time_field :start_time %>
   </div>
   <div class="form-group">
-    <%= f.label :end_time %>
-    <%= f.datetime_select(:end_time) %>
+    <%= f.label :end_time, "End Time" %>
+    <%= f.date_field :end_time %>
+    <%= f.time_field :end_time %>
   </div>
   <%= f.hidden_field :recipient_id, :value => params[:recipient_id] %>
   <div class="form-group">

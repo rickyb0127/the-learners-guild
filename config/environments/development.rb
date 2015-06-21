@@ -1,4 +1,6 @@
 Rails.application.configure do
+  config.action_controller.include_all_helpers = true
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -40,5 +42,5 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   Paperclip.options[:command_path] = "/usr/local/bin/"
-  
+
 end

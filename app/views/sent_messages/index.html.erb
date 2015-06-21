@@ -14,7 +14,7 @@
     <% @messages.each do |message| %>
     <% message.sender.user_skills.where(id: "#{message.trade_give_skill_id}").each do |sender| %>
     <% message.recipient.user_skills.where(id: "#{message.trade_ask_skill_id}").each do |recipient| %>
-    <tr data-link="<%= received_message_path(message) %>">
+    <tr>
       <td>To: <%= message.recipient.full_name %></td>
       <td><%= sender.skill.name %> for <%= recipient.skill.name %></td>
       <td><%= message.body %></td>

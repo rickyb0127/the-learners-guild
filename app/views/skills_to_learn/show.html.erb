@@ -6,7 +6,13 @@
     <% if matched_user.image.present? %>
       <%= image_tag matched_user.image.url(:med) %>
     <% end %>
-    <p><%= link_to matched_user.full_name, user_path(matched_user) %> knows <%= matched_skill.skill.name %></p>
-    <p>Lives in <%= matched_user.city %></p>
+    <p><%= link_to matched_user.full_name, user_path(matched_user) %></p>
+    <p>Location: <%= matched_user.city %>, <%= matched_user.state %></p>
+
+    <p>Wants to learn</p>
+    <% matched_user.user_skills.where(learned: nil).each do |matched_wishlist_items| %>
+      <li><%= matched_wishlist_items.skill.name %></li>
+    <% end %>
+    <div class="buffer"></div>
   <% end %>
 <% end %>

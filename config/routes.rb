@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :user_skills
   resources :skills_to_learn
   resources :messages
-  resources :sent_messages, only: [:index, :show]
+  resources :sent_messages, only: [:index]
   resources :received_messages, only: [:index, :show]
 
 end
