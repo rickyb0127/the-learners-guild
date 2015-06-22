@@ -14,13 +14,24 @@
     <% @messages.each do |message| %>
     <% message.sender.user_skills.where(id: "#{message.trade_give_skill_id}").each do |sender| %>
     <% message.recipient.user_skills.where(id: "#{message.trade_ask_skill_id}").each do |recipient| %>
-    <tr data-link="<%= received_message_path(message) %>">
-      <td><%= message.sender.full_name %></td>
-      <td><%= sender.skill.name %> for <%= recipient.skill.name %></td>
-      <td><%= message.body %></td>
-      <td><%= message.created_at.strftime("%b %d") %></td>
-    </tr>
+      <tr class="submit-field" data-link="<%= received_message_path(message) %>">
+        <% if message.read == nil %>
+          <%= form_for message do |f| %>
+          <%= f.hidden_field :read, value: :true %>
+          <%= f.submit "", class: "submit-btn", :style => "display: none;" %>
+          <td><strong><%= message.sender.full_name %></strong></td>
+          <td><strong><%= sender.skill.name %> for <%= recipient.skill.name %></strong></td>
+          <td><strong><%= message.body %></strong></td>
+          <td><strong><%= message.created_at.strftime("%b %d") %></strong></td>
+        <% end %>
+        <% else %>
+          <td><%= message.sender.full_name %></td>
+          <td><%= sender.skill.name %> for <%= recipient.skill.name %></td>
+          <td><%= message.body %></td>
+          <td><%= message.created_at.strftime("%b %d") %></td>
+      </tr>
   </tbody>
+        <% end %>
 
     <% end %>
     <% end %>
