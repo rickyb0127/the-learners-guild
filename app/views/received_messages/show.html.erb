@@ -2,18 +2,28 @@
   <h1>Trade Breakdown</h1>
 </div>
 
+<% @total_messages.each do |total_message| %>
 <% @message.sender.user_skills.where(id: "#{@message.trade_give_skill_id}").each do |sender| %>
 <% @message.recipient.user_skills.where(id: "#{@message.trade_ask_skill_id}").each do |recipient| %>
-  <%= @message.sender.full_name %>
-  sends <%= sender.skill.name %>
-  for <%= recipient.skill.name %>
+  <% if total_message.created_at === @total_messages.first.created_at %>
+    <div class="well">
+      <ul>Sent By <%= total_message.sender.full_name %></ul>
+      <ul><%= total_message.created_at.strftime("%D") %> (<%= time_ago_in_words(total_message.created_at) %> ago)</ul>
+      <ul>Message: <%= total_message.body %></ul>
+      <ul>Skills to Trade: <%= sender.skill.name %> for <%= recipient.skill.name %></ul>
+      <ul>Start Date and Time: <%= total_message.start_time.strftime("%a, %b %d at %-I:%M %p") %></ul>
+      <ul>Duration (total time in hours): <%= total_message.duration %></ul>
+    </div>
+    <% else %>
+    <div class="well">
+      <ul>Sent By <%= total_message.sender.full_name %></ul>
+      <ul><%= total_message.created_at.strftime("%D") %> (<%= time_ago_in_words(total_message.created_at) %> ago)</ul>
+      <ul>Message: <%= total_message.body %></ul>
+    </div>
+  <% end %>
 <% end %>
 <% end %>
+<% end %>
 
-<div class="buffer"></div>
-
-Message
-<p><%= @message.body %></p>
-
-Start date and time
-<%= @message.start_time.strftime("%a, %b %d at %I:%M %p") %>
+<%= link_to "reply", new_reply_path(params["message"] => { :conversation_id => "#{@message.conversation_id}", :recipient_id => "#{@message.sender_id}", :trade_give_skill_id => "#{@message.trade_ask_skill_id}", :trade_ask_skill_id => "#{@message.trade_give_skill_id}", :start_time => "#{@message.start_time}", :duration => "#{@message.duration}" }), class: "reply-link", remote: true %>
+<div id="reply-message-form" style="display:none;"></div>

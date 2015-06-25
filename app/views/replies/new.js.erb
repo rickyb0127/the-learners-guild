@@ -1,0 +1,4 @@
+$(".reply-link").hide();
+
+$("#reply-message-form").html("<%= escape_javascript (render 'form') %>");
+$('#reply-message-form').slideDown(350);

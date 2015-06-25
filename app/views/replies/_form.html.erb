@@ -1,0 +1,15 @@
+<%= form_for @message, class: "form-horizontal", remote: true do |f| %>
+  <div class="form-group">
+    <%= f.label :body, "Message" %>
+    <textarea class="form-control" rows="5" name="message[body]" id="message_body"></textarea>
+  </div>
+  <%= f.hidden_field :trade_give_skill_id, :value => params[:trade_give_skill_id] %>
+  <%= f.hidden_field :trade_ask_skill_id, :value => params[:trade_ask_skill_id] %>
+  <%= f.hidden_field :start_time, :value => params[:start_time] %>
+  <%= f.hidden_field :duration, :value => params[:duration] %>
+  <%= f.hidden_field :recipient_id, :value => params[:recipient_id] %>
+  <%= f.hidden_field :conversation_id, :value => params[:conversation_id] %>
+  <div class="form-group">
+    <%= f.submit "Send Message", class: "btn btn-primary" %>
+  </div>
+<% end %>

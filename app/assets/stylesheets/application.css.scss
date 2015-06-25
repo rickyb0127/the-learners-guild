@@ -75,6 +75,10 @@
 
   }
 
-  .message-highlight {
+  .submit-field {
     cursor: pointer;
+  }
+
+  .submit-field:hover td {
+    background-color: yellow;
   }

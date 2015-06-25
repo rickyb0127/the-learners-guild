@@ -1,7 +1,7 @@
 class SentMessagesController < ApplicationController
   def index
-    @messages = sender_messages
     @user = current_user
+    @messages = Message.where(sender_id: @user.id).all
   end
 
   def show

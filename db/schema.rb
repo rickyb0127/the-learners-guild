@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622000808) do
+ActiveRecord::Schema.define(version: 20150624233617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "conversations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "messages", force: :cascade do |t|
     t.integer  "sender_id"
@@ -27,10 +32,18 @@ ActiveRecord::Schema.define(version: 20150622000808) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.boolean  "read"
+    t.string   "meetup_location"
+    t.integer  "conversation_id"
+    t.integer  "duration"
   end
 
   create_table "skills", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.integer "message_id"
+    t.string  "name"
   end
 
   create_table "user_skills", force: :cascade do |t|

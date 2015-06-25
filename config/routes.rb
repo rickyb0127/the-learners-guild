@@ -17,5 +17,7 @@ Rails.application.routes.draw do
   resources :messages
   resources :sent_messages, only: [:index]
   resources :received_messages, only: [:index, :show]
+  resources :conversations
+  resources :replies
 
 end
